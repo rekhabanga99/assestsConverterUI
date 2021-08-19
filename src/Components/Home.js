@@ -2,7 +2,7 @@
 import Child from './Iconselector'
 
 import { Paper } from '@material-ui/core';
-import React from 'react';
+import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -11,20 +11,29 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import Eth from '../../src/img/eth.jpg'
-import Convert from '../../src/img/convert.png'
+import Eth from '../img/eth.png'
+import DropDown from '../img/1.png'
+import Convert from '../img/convert.png'
 
 
 import { FormControlLabel } from '@material-ui/core';
 
 
 
+const data = [
 
+    { id:1,title: 'Logan', year: 2017,img: '1.jpg' },
+    { id:2,title: 'Full ', year: 1987 ,img:'2.jpg'},
+    { id:3,title: 'Dangal', year: 2016 ,img:'5.jpg'},
+    { id:4,title: 'The ', year: 1973,img:'6.jpg' },
+    {id:5, title: 'Iooo ', year: 1968,img:'7.jpg' },
+  
+  ];
 
 
 const useStyles = makeStyles((theme) => ({
     img:{
-        padding:'26% 15% 13% 10%' },
+        padding:'26% 15% 13% 26%' },
     root: {
         // display: 'flex',
         // flexWrap: 'wrap',
@@ -62,8 +71,8 @@ const useStyles = makeStyles((theme) => ({
             // minHeight:150
         },
         '& .MuiCard-root':{
-            maxHeight:242,
-            minHeight:242,
+            maxHeight:192,
+            minHeight:192,
             maxWidth:186
         },
         '& .MuiAutocomplete-inputRoot[class*="MuiInput-root"] .MuiAutocomplete-input:first-child':{
@@ -82,7 +91,6 @@ const useStyles = makeStyles((theme) => ({
         marginBottom:'10px',
         '& .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete-inputRoot':{
             padding:'50px 20px',
-            background:'red',
             // minHeight:150
         }
     },
@@ -116,7 +124,7 @@ const useStyles = makeStyles((theme) => ({
     },
     btn1:{
         '& .MuiButton-containedPrimary':{
-         backgroundColor:'#0b008099'
+         backgroundColor:'#9e7cbf'
         },
          marginLeft:25,
         textTransform:'none',
@@ -125,7 +133,7 @@ const useStyles = makeStyles((theme) => ({
     },
     btn2:{
         '& .MuiButton-containedPrimary':{
-            backgroundColor:'#0b008099'
+            backgroundColor:'#9e7cbf'
            },
         marginRight:10,
         width:'83%',
@@ -153,9 +161,41 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const Home = () => {
+const Home = (props) => {
+    
+    const [fromImg,setFromImage]=useState('')
+    const [fromName,setFromName]=useState({})
+    const [obj,setSelectedObj]=useState({id:1,title: 'Logan', year: 2017,img: '1.jpg'})
+    const [toObj,setSelectedTo]=useState( { id:2,title: 'Full ', year: 1987 ,img:'2.jpg'})
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
+   
+
+    const getOptionSelected= (option,newValue)=>{
+           if(newValue){
+            setSelectedObj(newValue)
+            // setFromName(newValue.title)
+            console.log('----------',newValue)
+           }else{
+            setSelectedObj({})  
+           }
+            
+            
+            // setFromImage(newValue.img)
+    }
+
+    const setToObj= (option,newValue)=>{
+        if(newValue){
+            setSelectedTo(newValue)
+         console.log('----------',newValue)
+        }else{
+            setSelectedTo({})  
+        }
+         
+         
+         // setFromImage(newValue.img)
+ }
+
+
 
     return (
 
@@ -166,7 +206,14 @@ const Home = () => {
         
             <Grid item xs={10}>
             <div className={classes.label}>Assests</div>
-            <Paper className={classes.child} >   <Child /></Paper>
+            <Paper className={classes.child} >  
+             <Child 
+             obj={obj}
+             getOptionSelected={getOptionSelected}
+             setFromImage={setFromImage}
+             setFromName={setFromName}
+            data={data}
+            src={DropDown} /></Paper>
          
             </Grid>
             </Grid>
@@ -178,8 +225,17 @@ const Home = () => {
                     <Paper elevation={1} >
                         <Card>
                             <CardContent>
-                            <img className={classes.img}  src={Eth} />
-                                <Child />
+                            <img className={classes.img} 
+                              src={`${window.location.origin}/img/${obj.img}`}
+                              />
+                                <Child  
+                                obj={obj}
+                                   setFromImage={setFromImage}
+                                   fromName={fromName}
+                                   getOptionSelected={getOptionSelected}
+                                   setFromName={setFromName}
+                                  data={data}
+                                 src={DropDown}/>
                             </CardContent>
                          
                         </Card>
@@ -201,13 +257,17 @@ const Home = () => {
                         <Card>
 
                             <CardContent>
-                            <img className={classes.img}  src={Eth} />
-                                <Child />
+                            <img className={classes.img}  
+                            src={`${window.location.origin}/img/${toObj.img}`}/>
+                                <Child
+                                   toObj={toObj}
+                                   setToObj={setToObj}
+                                   src={DropDown}
+                                 data={data}
+                                 />
 
                             </CardContent>
-                            {/* <CardActions>
-                                {/* <Button size="small">Learn More</Button> */}
-                            {/* </CardActions> */} 
+                          
                         </Card>
                     </Paper>
                 </Grid>
@@ -220,13 +280,13 @@ const Home = () => {
                 <Grid xs={8}>
                 <div className={classes.label}>Amount</div>
                     <Paper className={classes.child}>
-                    <TextField id="outlined-basic" label="Outlined" />
+                    <TextField id="outlined-basic" label="" />
                     </Paper>
                 </Grid>
 
                 <Grid xs={4} style={{marginTop:22}}>
                 
-                    <Button variant="contained" color="primary" className={classes.btn1} href="#contained-buttons">
+                    <Button variant="contained" color="primary" className={classes.btn1} >
                         Max
                     </Button>
                 </Grid>
@@ -239,7 +299,7 @@ const Home = () => {
             <Grid container  justify="center" className={classes.gridX1}>
             
       
-            <Button className={classes.btn2} variant="contained" color="primary" href="#contained-buttons" style={{textTransform:'none'}}>
+            <Button className={classes.btn2} variant="contained" color="primary"  style={{textTransform:'none'}}>
                         Connect wallet
                     </Button>
             </Grid>
