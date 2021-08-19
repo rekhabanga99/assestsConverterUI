@@ -3,11 +3,10 @@ import React, { Fragment, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-import FacebookIcon from '@material-ui/icons/Facebook';
-import AppleIcon from '@material-ui/icons/Apple';
+
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from '@material-ui/core/styles';
-import { ReactComponent as Logo } from './eth.svg';
+
 
 
 
@@ -59,8 +58,7 @@ const ComboBox = (props) => {
                 return (
                     <Fragment>
                         <IconButton color="primary">
-                            {/* <img src={props.src}/> */}
-                            <img src={`${window.location.origin}/img/${option.img}`} />{/*Mock image, attribute in option*/}
+                            <img  alt="" src={`${window.location.origin}/img/${option.img}`} />{/*Mock image, attribute in option*/}
                         </IconButton>
                         {option.title}
                     </Fragment>

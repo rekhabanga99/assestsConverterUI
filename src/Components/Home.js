@@ -5,18 +5,14 @@ import { Paper } from '@material-ui/core';
 import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Eth from '../img/eth.png'
 import DropDown from '../img/1.png'
-import Convert from '../img/convert.png'
 
 
-import { FormControlLabel } from '@material-ui/core';
 
 
 
@@ -229,7 +225,7 @@ const Home = (props) => {
                     <Paper elevation={1} >
                         <Card>
                             <CardContent>
-                            <img className={classes.img} 
+                            <img  alt=""  className={classes.img} 
                               src={`${window.location.origin}/img/${obj.img}`}
                               />
                                 <Child  
@@ -250,7 +246,7 @@ const Home = (props) => {
 
 
                 <Grid item xs={2} >
-                <img style={{marginTop:80}} className={classes.img}  src={Eth} />
+                <img style={{marginTop:80}} className={classes.img}  alt=""  src={Eth} />
                
                 </Grid>
 
@@ -262,6 +258,7 @@ const Home = (props) => {
 
                             <CardContent>
                             <img className={classes.img}  
+                            alt="" 
                             src={`${window.location.origin}/img/${toObj.img}`}/>
                                 <Child
                                    toObj={toObj}
