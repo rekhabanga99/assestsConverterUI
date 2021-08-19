@@ -76,7 +76,9 @@ const useStyles = makeStyles((theme) => ({
             maxWidth:186
         },
         '& .MuiAutocomplete-inputRoot[class*="MuiInput-root"] .MuiAutocomplete-input:first-child':{
-            marginBottom:'-45px'
+            marginBottom:'-45px',
+            color:'#9e7cbf',
+            fontWeight:700
         },
         '& .MuiAutocomplete-popupIndicator':{
          margin:'22px 9px'
@@ -147,7 +149,9 @@ const useStyles = makeStyles((theme) => ({
         minHeight:50,
         marginBottom:10,
         '& .MuiAutocomplete-inputRoot[class*="MuiInput-root"] .MuiAutocomplete-input:first-child':{
-         padding:'18px 16px'
+         padding:'18px 16px',
+         color:'#9e7cbf',
+        fontWeight:700
         }
     },
  
